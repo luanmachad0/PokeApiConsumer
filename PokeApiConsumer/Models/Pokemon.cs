@@ -5,7 +5,7 @@
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public int Id { get; set; }
         public string? name { get; set; }
-        public int base_experience { get; set; }
+        public int? base_experience { get; set; }
         public int height { get; set; }
         public bool is_default { get; set; }
         public int order { get; set; }

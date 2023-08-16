@@ -9,14 +9,11 @@ namespace PokeConsumer.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class PokeController : ControllerBase
-    {
-        
-        private readonly ILogger<PokeController> _logger;
+    { 
         private static readonly HttpClient client;
 
-        public PokeController(ILogger<PokeController> logger)
+        public PokeController()
         {
-            _logger = logger;
         }
 
         static PokeController()
@@ -43,8 +40,11 @@ namespace PokeConsumer.Controllers
                 var evolution = await GetEvolution(result.Id);
                 result.evolution = evolution;
 
-                byte[] spriteAsBytes = Encoding.ASCII.GetBytes(result.sprites.back_default);
-                result.base64_sprite_default = Convert.ToBase64String(spriteAsBytes);
+                if (result.sprites?.back_default is not null)
+                {
+                    byte[] spriteAsBytes = Encoding.ASCII.GetBytes(result.sprites.back_default);
+                    result.base64_sprite_default = Convert.ToBase64String(spriteAsBytes);
+                }
             }
             else
             {
